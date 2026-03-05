@@ -34,6 +34,17 @@ git clone https://github.com/prikotov/google-trends.git .opencode/skills/google-
 pip install -r .opencode/skills/google-trends/requirements.txt
 ```
 
+## Structure
+
+```
+your-project/
+├── google_trends_reports/     # Created automatically on first run
+│   └── YYYY-MM-DD/            # Daily reports folder
+│       └── google_trends_*    # Report files
+└── .opencode/skills/
+    └── google-trends/         # This skill
+```
+
 ## Usage
 
 ### Direct via Python
@@ -96,17 +107,6 @@ Compare popularity of "opencode" and "cursor ai"
 
 ```
 Show related queries for "python programming"
-```
-
-## Results
-
-Reports are saved to a dated folder:
-
-```
-google_trends_reports/
-└── 2026-03-05/
-    ├── google_trends_opencode_2026-03-05_10-30-15.csv
-    └── google_trends_opencode_2026-03-05_10-30-15.md
 ```
 
 ## Limitations
