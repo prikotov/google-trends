@@ -103,10 +103,10 @@ Show related queries for "python programming"
 Reports are saved to a dated folder:
 
 ```
-trends_reports/
+google_google_trends_reports/
 └── 2026-03-05/
-    ├── trends_opencode_2026-03-05_10-30-15.csv
-    └── trends_opencode_2026-03-05_10-30-15.md
+    ├── google_trends_opencode_2026-03-05_10-30-15.csv
+    └── google_trends_opencode_2026-03-05_10-30-15.md
 ```
 
 ## Limitations

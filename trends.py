@@ -109,7 +109,7 @@ def save_markdown(data, filename, title, keyword):
 def create_report_dir():
     """Создать папку для отчётов"""
     import os
-    report_dir = os.path.join(os.getcwd(), 'trends_reports')
+    report_dir = os.path.join(os.getcwd(), 'google_google_trends_reports')
     if not os.path.exists(report_dir):
         os.makedirs(report_dir)
     
@@ -163,16 +163,16 @@ def main():
         timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
         keyword_safe = args.keywords[0].replace(' ', '_')
         
-        csv_file = os.path.join(report_dir, f'trends_{keyword_safe}_{timestamp}.csv')
-        md_file = os.path.join(report_dir, f'trends_{keyword_safe}_{timestamp}.md')
+        csv_file = os.path.join(report_dir, f'google_trends_{keyword_safe}_{timestamp}.csv')
+        md_file = os.path.join(report_dir, f'google_trends_{keyword_safe}_{timestamp}.md')
         
         save_csv(data, csv_file, fieldnames)
         save_markdown(data, md_file, title, ', '.join(args.keywords))
         
-        print(f"  Папка отчёта: trends_reports/{datetime.now().strftime('%Y-%m-%d')}")
+        print(f"  Папка отчёта: google_google_trends_reports/{datetime.now().strftime('%Y-%m-%d')}")
         print(f"  Создано файлов:")
-        print(f"    - trends_{keyword_safe}_{timestamp}.csv")
-        print(f"    - trends_{keyword_safe}_{timestamp}.md")
+        print(f"    - google_trends_{keyword_safe}_{timestamp}.csv")
+        print(f"    - google_trends_{keyword_safe}_{timestamp}.md")
         print(f"\n  Найдено записей: {len(data)}")
         
         # Показать последние 5 записей для timeline

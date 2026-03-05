@@ -86,8 +86,8 @@ bash .opencode/skills/google-trends/trends-daily.sh DE
 
 ## Output
 
-`trends_reports/YYYY-MM-DD/`:
-- `trends_query_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — Trends data
+`google_google_trends_reports/YYYY-MM-DD/`:
+- `google_trends_query_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — Trends data
 
 ### Timeline Report Fields
 
