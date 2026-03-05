@@ -75,15 +75,6 @@ php .opencode/skills/google-trends/trends.php -t geo "python"
 | `region` | Регион |
 | `value` | Популярность в регионе |
 
-## Требования
-
-⚠️ **Google Trends API в альфа-версии**
-
-Для доступа к API нужно:
-1. Подать заявку: https://developers.google.com/search/apis/trends
-2. Получить API ключ
-3. Создать файл `google_trends_config.json`
-
 ## Ограничения API
 
 - Данные за последние 5 лет
