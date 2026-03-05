@@ -26,14 +26,14 @@ pip install -r requirements.txt
 ### Get Trending Searches (Today)
 
 ```bash
-# US Daily Trends
+# US Daily Trends (default)
 bash trends-daily.sh US
 
 # Russia
 bash trends-daily.sh RU
 
-# Worldwide
-bash trends-daily.sh
+# Germany
+bash trends-daily.sh DE
 ```
 
 ### Check Keyword Interest Over Time
@@ -107,13 +107,12 @@ python3 trends.py "react hooks" -m queries
 
 | Code | Country |
 |------|---------|
-| US | United States |
+| US | United States (default) |
 | RU | Russia |
 | DE | Germany |
 | GB | United Kingdom |
 | FR | France |
 | JP | Japan |
-| (empty) | Worldwide |
 
 ## Requirements
 

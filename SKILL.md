@@ -12,9 +12,21 @@ description: Анализ поисковых трендов через Google Tr
 
 ## Запуск
 
+### Анализ поисковых запросов
+
 ```bash
 python3 .opencode/skills/google-trends/trends.py [опции] <запросы...>
 ```
+
+### Тренды дня
+
+```bash
+bash .opencode/skills/google-trends/trends-daily.sh [код_страны]
+```
+
+Код страны: `RU`, `US`, `DE`, `GB` и т.д. По умолчанию `US`.
+
+## Параметры trends.py
 
 ### Обязательный параметр
 
@@ -37,7 +49,7 @@ python3 .opencode/skills/google-trends/trends.py [опции] <запросы...
 | `related` | Связанные темы |
 | `queries` | Связанные запросы |
 
-### Примеры
+### Примеры trends.py
 
 ```bash
 # Динамика за год
@@ -57,6 +69,19 @@ python3 .opencode/skills/google-trends/trends.py -m regions "python"
 
 # Связанные запросы
 python3 .opencode/skills/google-trends/trends.py -m queries "python"
+```
+
+### Примеры trends-daily.sh
+
+```bash
+# Тренды в США (по умолчанию)
+bash .opencode/skills/google-trends/trends-daily.sh
+
+# Тренды в России
+bash .opencode/skills/google-trends/trends-daily.sh RU
+
+# Тренды в Германии
+bash .opencode/skills/google-trends/trends-daily.sh DE
 ```
 
 ## Результат
