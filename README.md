@@ -1,131 +1,116 @@
-# Google Trends - AI Agent Skill
+# Google Trends
 
-Monitor and analyze Google Trends data for market research, content planning, and trend tracking.
+> Анализ поисковых трендов через Google Trends
 
-## Capabilities
+## Зачем это нужно
 
-1. **Daily Trending Searches** - What's trending today in any country
-2. **Keyword Interest Over Time** - Historical trend data for keywords
-3. **Keyword Comparison** - Compare multiple keywords
-4. **Related Topics & Queries** - Discover related searches
-5. **Regional Interest** - See where keywords are most popular
+Этот skill извлекает данные о популярности поисковых запросов из Google Trends. Данные помогают:
 
-## Installation
+- **Отслеживать тренды** — что ищут прямо сейчас в разных странах
+- **Сравнивать популярность** — несколько запросов на одном графике
+- **Находить связанные запросы** — расширять семантическое ядро
+- **Анализировать географию** — где интерес к запросу выше
 
-```bash
-# Clone the skill
-git clone https://github.com/prikotov/google-trends.git
-cd google-trends
+## Что вы получите
 
-# Install Python dependencies
-pip install -r requirements.txt
-```
+Отчёты в форматах CSV и Markdown:
 
-## Usage
+| Тип | Содержание |
+|-----|------------|
+| `timeline` | Динамика интереса во времени |
+| `regions` | Географическое распределение |
+| `related` | Связанные темы |
+| `queries` | Связанные поисковые запросы |
 
-### Get Trending Searches (Today)
+## Установка
 
-```bash
-# US Daily Trends (default)
-bash trends-daily.sh US
-
-# Russia
-bash trends-daily.sh RU
-
-# Germany
-bash trends-daily.sh DE
-```
-
-### Check Keyword Interest Over Time
+Skill совместим с различными AI-агентами. Примеры ниже даны для OpenCode.
 
 ```bash
-# Timeline analysis (default: 12 months)
-python3 trends.py "opencode" -m timeline
+# Клонирование skill
+git clone https://github.com/prikotov/google-trends.git .opencode/skills/google-trends
 
-# Specify period
-python3 trends.py "bitcoin" -m timeline -t "today 3-m"
-
-# Compare keywords
-python3 trends.py "opencode" "cursor" "cline" -m timeline
+# Установка зависимостей Python
+pip install -r .opencode/skills/google-trends/requirements.txt
 ```
 
-### Related Queries
+## Использование
+
+### Напрямую через Python
 
 ```bash
-# Find related searches
-python3 trends.py "artificial intelligence" -m queries
+# Динамика за год (по умолчанию)
+python3 .opencode/skills/google-trends/trends.py "opencode"
+
+# За последние 3 месяца
+python3 .opencode/skills/google-trends/trends.py -t "today 3-m" "artificial intelligence"
+
+# Сравнение запросов
+python3 .opencode/skills/google-trends/trends.py "opencode" "cursor ai" "cline"
+
+# Для конкретной страны
+python3 .opencode/skills/google-trends/trends.py -g RU "веб-разработка"
 ```
 
-### Regional Interest
+### Параметры
+
+| Параметр | Сокращение | Описание | Пример |
+|----------|------------|----------|--------|
+| `--mode` | `-m` | Тип отчёта | `-m regions` |
+| `--geo` | `-g` | Код страны | `-g RU` |
+| `--timeframe` | `-t` | Период | `-t "today 3-m"` |
+
+### Типы отчётов
+
+| Значение | Описание |
+|----------|----------|
+| `timeline` | Динамика во времени (по умолчанию) |
+| `regions` | Географическое распределение |
+| `related` | Связанные темы |
+| `queries` | Связанные запросы |
+
+### Тренды дня
 
 ```bash
-# Interest by country
-python3 trends.py "python" -m regions
+# США (по умолчанию)
+bash .opencode/skills/google-trends/trends-daily.sh US
 
-# Specific country
-python3 trends.py "веб-разработка" -m regions -g RU
+# Россия
+bash .opencode/skills/google-trends/trends-daily.sh RU
+
+# Германия
+bash .opencode/skills/google-trends/trends-daily.sh DE
 ```
 
-## Options
+### Через агента
 
-| Option | Short | Description | Values |
-|--------|-------|-------------|--------|
-| `--mode` | `-m` | Report type | `timeline`, `regions`, `related`, `queries` |
-| `--geo` | `-g` | Geography | Country codes (US, RU, DE, etc.) |
-| `--timeframe` | `-t` | Time period | `today 3-m`, `today 12-m`, `today 5-y` |
+После установки skill агент автоматически узнаёт о нём. Примеры запросов:
 
-## Output
-
-Reports are saved to `trends_reports/YYYY-MM-DD/`:
-- `trends_YYYY-MM-DD_HH-MM-SS.csv` - CSV format
-- `trends_YYYY-MM-DD_HH-MM-SS.md` - Markdown format
-
-## Example Workflows
-
-### Morning Market Research
-
-```bash
-# Get trending searches
-bash trends-daily.sh US
-bash trends-daily.sh RU
-
-# Check if trends relate to your business
-python3 trends.py "AI tools" -m timeline
+```
+Проверь тренды для запроса "artificial intelligence"
 ```
 
-### Content Planning
-
-```bash
-# Compare potential blog topics
-python3 trends.py "react hooks" "vue composition api" "svelte" -m timeline
-
-# Find related queries
-python3 trends.py "react hooks" -m queries
+```
+Сравни популярность "opencode" и "cursor ai"
 ```
 
-## Country Codes
+```
+Покажи связанные запросы для "python programming"
+```
 
-| Code | Country |
-|------|---------|
-| US | United States (default) |
-| RU | Russia |
-| DE | Germany |
-| GB | United Kingdom |
-| FR | France |
-| JP | Japan |
+## Результаты
 
-## Requirements
+Отчёты сохраняются в папку с датой:
 
-- Python 3.7+
-- pytrends library
+```
+trends_reports/
+└── 2026-03-05/
+    ├── trends_opencode_2026-03-05_10-30-15.csv
+    └── trends_opencode_2026-03-05_10-30-15.md
+```
 
-## Limitations
+## Ограничения
 
-- Google Trends doesn't provide official API
-- Rate limiting may apply for heavy usage
-- Data is relative (0-100 scale), not absolute numbers
-- Historical data limited to ~5 years
-
-## License
-
-MIT
+- Данные за последние 5 лет
+- Сравнение до 5 запросов одновременно
+- Относительные значения (0-100), не абсолютные числа
