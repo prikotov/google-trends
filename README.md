@@ -1,106 +1,106 @@
 # Google Trends
 
-> Анализ поисковых трендов через Google Trends
+> Search trend analysis via Google Trends
 
-## Зачем это нужно
+## Why use this
 
-Этот skill извлекает данные о популярности поисковых запросов из Google Trends. Данные помогают:
+This skill extracts search query popularity data from Google Trends. The data helps:
 
-- **Отслеживать тренды** — что ищут прямо сейчас в разных странах
-- **Сравнивать популярность** — несколько запросов на одном графике
-- **Находить связанные запросы** — расширять семантическое ядро
-- **Анализировать географию** — где интерес к запросу выше
+- **Track trends** — what people are searching for right now in different countries
+- **Compare popularity** — multiple queries on one chart
+- **Find related queries** — expand your semantic core
+- **Analyze geography** — where interest in a query is higher
 
-## Что вы получите
+## What you get
 
-Отчёты в форматах CSV и Markdown:
+Reports in CSV and Markdown formats:
 
-| Тип | Содержание |
-|-----|------------|
-| `timeline` | Динамика интереса во времени |
-| `regions` | Географическое распределение |
-| `related` | Связанные темы |
-| `queries` | Связанные поисковые запросы |
+| Type | Content |
+|------|----------|
+| `timeline` | Interest dynamics over time |
+| `regions` | Geographic distribution |
+| `related` | Related topics |
+| `queries` | Related search queries |
 
-## Установка
+## Installation
 
-Skill совместим с различными AI-агентами. Примеры ниже даны для OpenCode.
+Skill is compatible with various AI agents. Examples below are for OpenCode.
 
 ```bash
-# Клонирование skill
+# Clone skill
 git clone https://github.com/prikotov/google-trends.git .opencode/skills/google-trends
 
-# Установка зависимостей Python
+# Install Python dependencies
 pip install -r .opencode/skills/google-trends/requirements.txt
 ```
 
-## Использование
+## Usage
 
-### Напрямую через Python
+### Direct via Python
 
 ```bash
-# Динамика за год (по умолчанию)
+# Year-long timeline (default)
 python3 .opencode/skills/google-trends/trends.py "opencode"
 
-# За последние 3 месяца
+# Last 3 months
 python3 .opencode/skills/google-trends/trends.py -t "today 3-m" "artificial intelligence"
 
-# Сравнение запросов
+# Compare queries
 python3 .opencode/skills/google-trends/trends.py "opencode" "cursor ai" "cline"
 
-# Для конкретной страны
-python3 .opencode/skills/google-trends/trends.py -g RU "веб-разработка"
+# For specific country
+python3 .opencode/skills/google-trends/trends.py -g RU "web development"
 ```
 
-### Параметры
+### Parameters
 
-| Параметр | Сокращение | Описание | Пример |
-|----------|------------|----------|--------|
-| `--mode` | `-m` | Тип отчёта | `-m regions` |
-| `--geo` | `-g` | Код страны | `-g RU` |
-| `--timeframe` | `-t` | Период | `-t "today 3-m"` |
+| Parameter | Short | Description | Example |
+|-----------|-------|-------------|---------|
+| `--mode` | `-m` | Report type | `-m regions` |
+| `--geo` | `-g` | Country code | `-g RU` |
+| `--timeframe` | `-t` | Time period | `-t "today 3-m"` |
 
-### Типы отчётов
+### Report types
 
-| Значение | Описание |
-|----------|----------|
-| `timeline` | Динамика во времени (по умолчанию) |
-| `regions` | Географическое распределение |
-| `related` | Связанные темы |
-| `queries` | Связанные запросы |
+| Value | Description |
+|-------|-------------|
+| `timeline` | Interest over time (default) |
+| `regions` | Geographic distribution |
+| `related` | Related topics |
+| `queries` | Related queries |
 
-### Тренды дня
+### Daily Trends
 
 ```bash
-# США (по умолчанию)
+# US (default)
 bash .opencode/skills/google-trends/trends-daily.sh US
 
-# Россия
+# Russia
 bash .opencode/skills/google-trends/trends-daily.sh RU
 
-# Германия
+# Germany
 bash .opencode/skills/google-trends/trends-daily.sh DE
 ```
 
-### Через агента
+### Via agent
 
-После установки skill агент автоматически узнаёт о нём. Примеры запросов:
-
-```
-Проверь тренды для запроса "artificial intelligence"
-```
+After installation, the agent automatically recognizes the skill. Example requests:
 
 ```
-Сравни популярность "opencode" и "cursor ai"
+Check trends for "artificial intelligence"
 ```
 
 ```
-Покажи связанные запросы для "python programming"
+Compare popularity of "opencode" and "cursor ai"
 ```
 
-## Результаты
+```
+Show related queries for "python programming"
+```
 
-Отчёты сохраняются в папку с датой:
+## Results
+
+Reports are saved to a dated folder:
 
 ```
 trends_reports/
@@ -109,8 +109,8 @@ trends_reports/
     └── trends_opencode_2026-03-05_10-30-15.md
 ```
 
-## Ограничения
+## Limitations
 
-- Данные за последние 5 лет
-- Сравнение до 5 запросов одновременно
-- Относительные значения (0-100), не абсолютные числа
+- Data for last 5 years
+- Compare up to 5 queries simultaneously
+- Relative values (0-100), not absolute numbers
