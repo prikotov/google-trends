@@ -126,11 +126,6 @@ python3 trends.py "react hooks" -m queries
 - Data is relative (0-100 scale), not absolute numbers
 - Historical data limited to ~5 years
 
-## Author
-
-**Dmitry Prikotov**  
-[prikotov.pro](https://prikotov.pro/)
-
 ## License
 
 MIT
