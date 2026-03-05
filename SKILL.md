@@ -1,6 +1,6 @@
 ---
 name: google-trends
-description: Анализ поисковых трендов через Google Trends API
+description: Анализ поисковых трендов через Google Trends
 ---
 
 ## Когда использовать
@@ -13,70 +13,87 @@ description: Анализ поисковых трендов через Google Tr
 ## Запуск
 
 ```bash
-php .opencode/skills/google-trends/trends.php [опции] <фраза>
+python3 .opencode/skills/google-trends/trends.py [опции] <запросы...>
 ```
 
 ### Обязательный параметр
 
-- `фраза` — поисковый запрос для анализа (в кавычках если есть пробелы)
+- `запросы` — один или несколько поисковых запросов для анализа
 
 ### Опции
 
 | Опция | Сокращение | Описание | Значения | По умолчанию |
 |-------|------------|----------|----------|--------------|
-| `--geo` | `-g` | Код региона (ISO 3166-1) | RU, US, DE и т.д. | WW (весь мир) |
-| `--period` | `-p` | Период | `7d`, `30d`, `90d`, `12m`, `5y` | `12m` |
-| `--type` | `-t` | Тип отчёта | `timeline`, `geo`, `related` | `timeline` |
-| `--compare` | `-c` | Сравнить с фразой | строка | без сравнения |
+| `--geo` | `-g` | Код региона | RU, US, DE и т.д. | весь мир |
+| `--timeframe` | `-t` | Период | `"today 3-m"`, `"today 12-m"`, `"today 5-y"` | `"today 12-m"` |
+| `--mode` | `-m` | Режим отчёта | `timeline`, `regions`, `related`, `queries` | `timeline` |
 
-### Типы отчётов
+### Режимы отчётов
 
 | Параметр | Описание |
 |----------|----------|
 | `timeline` | Динамика во времени (по умолчанию) |
-| `geo` | Географическое распределение |
-| `related` | Связанные запросы |
+| `regions` | Географическое распределение |
+| `related` | Связанные темы |
+| `queries` | Связанные запросы |
 
 ### Примеры
 
 ```bash
 # Динамика за год
-php .opencode/skills/google-trends/trends.php "opencode"
+python3 .opencode/skills/google-trends/trends.py "opencode"
 
-# За последние 30 дней
-php .opencode/skills/google-trends/trends.php -p 30d "artificial intelligence"
+# За последние 3 месяца
+python3 .opencode/skills/google-trends/trends.py -t "today 3-m" "artificial intelligence"
 
 # Для России
-php .opencode/skills/google-trends/trends.php -g RU "веб-разработка"
+python3 .opencode/skills/google-trends/trends.py -g RU "веб-разработка"
 
 # Сравнение двух запросов
-php .opencode/skills/google-trends/trends.php -c "cursor ai" "opencode"
+python3 .opencode/skills/google-trends/trends.py "opencode" "cursor ai"
 
 # География запросов
-php .opencode/skills/google-trends/trends.php -t geo "python"
+python3 .opencode/skills/google-trends/trends.py -m regions "python"
+
+# Связанные запросы
+python3 .opencode/skills/google-trends/trends.py -m queries "python"
 ```
 
 ## Результат
 
 `trends_reports/YYYY-MM-DD/`:
-- `trends_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — данные Trends
+- `trends_запрос_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — данные Trends
 
 ### Поля в отчёте timeline
 
 | Поле | Описание |
 |------|----------|
 | `date` | Дата |
-| `value` | Относительная популярность (0-100) |
+| `<запрос>` | Относительная популярность (0-100) для каждого запроса |
 
-### Поля в отчёте geo
+### Поля в отчёте regions
 
 | Поле | Описание |
 |------|----------|
 | `region` | Регион |
 | `value` | Популярность в регионе |
 
-## Ограничения API
+### Поля в отчёте related
+
+| Поле | Описание |
+|------|----------|
+| `topic` | Связанная тема |
+| `type` | Тип темы |
+| `value` | Относительная популярность |
+
+### Поля в отчёте queries
+
+| Поле | Описание |
+|------|----------|
+| `query` | Связанный запрос |
+| `value` | Относительная популярность |
+
+## Ограничения
 
 - Данные за последние 5 лет
-- Агрегирование: день, неделя, месяц, год
 - Сравнение до 5 запросов одновременно
