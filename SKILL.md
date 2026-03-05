@@ -1,124 +1,124 @@
 ---
 name: google-trends
-description: Анализ поисковых трендов через Google Trends
+description: Search trend analysis via Google Trends
 ---
 
-## Когда использовать
+## When to use
 
-- Анализ популярности поисковых запросов
-- Сравнение трендов по запросам
-- Динамика интереса во времени
-- Географическое распределение запросов
+- Analyze search query popularity
+- Compare trends across queries
+- Track interest dynamics over time
+- Geographic distribution of queries
 
-## Запуск
+## Usage
 
-### Анализ поисковых запросов
+### Search Query Analysis
 
 ```bash
-python3 .opencode/skills/google-trends/trends.py [опции] <запросы...>
+python3 .opencode/skills/google-trends/trends.py [options] <queries...>
 ```
 
-### Тренды дня
+### Daily Trends
 
 ```bash
-bash .opencode/skills/google-trends/trends-daily.sh [код_страны]
+bash .opencode/skills/google-trends/trends-daily.sh [country_code]
 ```
 
-Код страны: `RU`, `US`, `DE`, `GB` и т.д. По умолчанию `US`.
+Country code: `RU`, `US`, `DE`, `GB`, etc. Default: `US`.
 
-## Параметры trends.py
+## trends.py Parameters
 
-### Обязательный параметр
+### Required Argument
 
-- `запросы` — один или несколько поисковых запросов для анализа
+- `queries` — one or more search queries to analyze
 
-### Опции
+### Options
 
-| Опция | Сокращение | Описание | Значения | По умолчанию |
-|-------|------------|----------|----------|--------------|
-| `--geo` | `-g` | Код региона | RU, US, DE и т.д. | весь мир |
-| `--timeframe` | `-t` | Период | `"today 3-m"`, `"today 12-m"`, `"today 5-y"` | `"today 12-m"` |
-| `--mode` | `-m` | Режим отчёта | `timeline`, `regions`, `related`, `queries` | `timeline` |
+| Option | Short | Description | Values | Default |
+|--------|-------|-------------|--------|---------|
+| `--geo` | `-g` | Region code | RU, US, DE, etc. | worldwide |
+| `--timeframe` | `-t` | Time period | `"today 3-m"`, `"today 12-m"`, `"today 5-y"` | `"today 12-m"` |
+| `--mode` | `-m` | Report mode | `timeline`, `regions`, `related`, `queries` | `timeline` |
 
-### Режимы отчётов
+### Report Modes
 
-| Параметр | Описание |
-|----------|----------|
-| `timeline` | Динамика во времени (по умолчанию) |
-| `regions` | Географическое распределение |
-| `related` | Связанные темы |
-| `queries` | Связанные запросы |
+| Parameter | Description |
+|-----------|-------------|
+| `timeline` | Interest over time (default) |
+| `regions` | Geographic distribution |
+| `related` | Related topics |
+| `queries` | Related queries |
 
-### Примеры trends.py
+### trends.py Examples
 
 ```bash
-# Динамика за год
+# Year-long timeline
 python3 .opencode/skills/google-trends/trends.py "opencode"
 
-# За последние 3 месяца
+# Last 3 months
 python3 .opencode/skills/google-trends/trends.py -t "today 3-m" "artificial intelligence"
 
-# Для России
-python3 .opencode/skills/google-trends/trends.py -g RU "веб-разработка"
+# For Russia
+python3 .opencode/skills/google-trends/trends.py -g RU "web development"
 
-# Сравнение двух запросов
+# Compare two queries
 python3 .opencode/skills/google-trends/trends.py "opencode" "cursor ai"
 
-# География запросов
+# Query geography
 python3 .opencode/skills/google-trends/trends.py -m regions "python"
 
-# Связанные запросы
+# Related queries
 python3 .opencode/skills/google-trends/trends.py -m queries "python"
 ```
 
-### Примеры trends-daily.sh
+### trends-daily.sh Examples
 
 ```bash
-# Тренды в США (по умолчанию)
+# US trends (default)
 bash .opencode/skills/google-trends/trends-daily.sh
 
-# Тренды в России
+# Russia trends
 bash .opencode/skills/google-trends/trends-daily.sh RU
 
-# Тренды в Германии
+# Germany trends
 bash .opencode/skills/google-trends/trends-daily.sh DE
 ```
 
-## Результат
+## Output
 
 `trends_reports/YYYY-MM-DD/`:
-- `trends_запрос_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — данные Trends
+- `trends_query_YYYY-MM-DD_HH-MM-SS.csv` / `.md` — Trends data
 
-### Поля в отчёте timeline
+### Timeline Report Fields
 
-| Поле | Описание |
-|------|----------|
-| `date` | Дата |
-| `<запрос>` | Относительная популярность (0-100) для каждого запроса |
+| Field | Description |
+|-------|-------------|
+| `date` | Date |
+| `<query>` | Relative popularity (0-100) for each query |
 
-### Поля в отчёте regions
+### Regions Report Fields
 
-| Поле | Описание |
-|------|----------|
-| `region` | Регион |
-| `value` | Популярность в регионе |
+| Field | Description |
+|-------|-------------|
+| `region` | Region |
+| `value` | Popularity in region |
 
-### Поля в отчёте related
+### Related Report Fields
 
-| Поле | Описание |
-|------|----------|
-| `topic` | Связанная тема |
-| `type` | Тип темы |
-| `value` | Относительная популярность |
+| Field | Description |
+|-------|-------------|
+| `topic` | Related topic |
+| `type` | Topic type |
+| `value` | Relative popularity |
 
-### Поля в отчёте queries
+### Queries Report Fields
 
-| Поле | Описание |
-|------|----------|
-| `query` | Связанный запрос |
-| `value` | Относительная популярность |
+| Field | Description |
+|-------|-------------|
+| `query` | Related query |
+| `value` | Relative popularity |
 
-## Ограничения
+## Limitations
 
-- Данные за последние 5 лет
-- Сравнение до 5 запросов одновременно
+- Data available for last 5 years
+- Compare up to 5 queries simultaneously
